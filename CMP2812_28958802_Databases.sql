@@ -46,7 +46,9 @@ ViolationTime tinytext,
 ViolationDesc tinytext,
 Detachment tinytext,
 
+CHECK (ViolationDate >= 2020-01-01 and ViolationDate <= 2026-01-01), 
 PRIMARY KEY (ViolationID)
+
 );
 
 # Creating the table that holds officer information and actions
