@@ -24,7 +24,7 @@ PRIMARY KEY (DriverLicense)
 CREATE TABLE VehicleInformation (
 VehicleLicense tinytext,
 Colour tinytext,
-make tinytext),
+make tinytext,
 VINNumber tinytext,
 RegisteredAddress tinytext,
 StateRegistered tinytext,
