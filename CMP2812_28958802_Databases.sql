@@ -2,6 +2,9 @@
 CREATE DATABASE NYSPD;
 USE NYSPD;
 
+GRANT ALL ON NYSPD.* TO "Officer_User";
+GRANT Select On NYSPD.ViolationInformation TO "Public_User";
+
 # Creating the table that hold Driver Information
 CREATE TABLE DriverInformation (
 FirstName tinytext,
@@ -22,17 +25,17 @@ PRIMARY KEY (DriverLicense)
 
 # Creating the table that holds Vehicle Information
 CREATE TABLE VehicleInformation (
-VehicleLicense tinytext,
+VehicleLicense varchar(20),
 Colour tinytext,
 make tinytext,
-VINNumber tinytext,
+VIN int,
 RegisteredAddress tinytext,
 StateRegistered tinytext,
-RegisteredYear int(4),
+RegisteredYear tinyint,
 CarType tinytext,
 RegisteredOwner tinytext,
 
-PRIMARY KEY (VINNumber)
+PRIMARY KEY (VIN)
 );
 
 # Creating the table that holds Violation Information
@@ -46,30 +49,32 @@ ViolationTime tinytext,
 ViolationDesc tinytext,
 Detachment tinytext,
 
-CHECK (ViolationDate >= 2020-01-01 and ViolationDate <= 2026-01-01), 
+CONSTRAINT DateCheck CHECK (ViolationDate >= date(2020-01-01)
+AND ViolationDate <= date(2026-01-01)),
+
 PRIMARY KEY (ViolationID)
 
 );
 
 # Creating the table that holds officer information and actions
 CREATE TABLE OfficerInformation (
-OfficerName tinytext,
-BadgeNumber int,
+OfficerName varchar(20),
+PersonelNumber int,
 Detachment tinytext,
 
-PRIMARY KEY (BadgeNumber)
+PRIMARY KEY (OfficerName)
 );
 
 # Creating the table that holds Violations 
 # This is the table the officer sees
 CREATE TABLE Violations (
 ViolationID int,
-OfficerName tinytext,
-BadgeNumber int,
+ViolationDate date,
+OfficerName varchar(20),
+VehicleVIN int,
 DriverLicense int,
 
-PRIMARY KEY (ViolationID),
-FOREIGN KEY (ViolationID) references ViolationInformation(ViolationID),
-FOREIGN KEY (OfficerName) references OfficerInformation(OfficerName),
-FOREIGN KEY (DriverLicense) references DriverInformation(DriverLicense)
+FOREIGN KEY (ViolationID) REFERENCES ViolationInformation(ViolationID),
+FOREIGN KEY (OfficerName) REFERENCES OfficerInformation(OfficerName),
+FOREIGN KEY (VehicleVIN) REFERENCES VehicleInformation(VIN)
 );
