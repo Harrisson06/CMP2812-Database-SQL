@@ -1,4 +1,4 @@
-# NEW YORK STATE PATROL DEPT
+# NEW YORK STATE PATROL Database
 # Creating the Database and then using the database
 CREATE DATABASE NYSPD;
 USE NYSPD;
@@ -16,16 +16,17 @@ USE NYSPD;
 
 # Creating the table that hold Driver Information
 CREATE TABLE DriverInformation (
-FirstName tinytext,
-LastName tinytext,
+FirstName Char(20),
+LastName Char(20),
 Address tinytext,
+Borough tinytext,
 City tinytext,
 State tinytext,
-ZipCode smallint,
+ZipCode int,
 DriverLicense int,
 StateIssuedLicense tinytext,
 BirthDate date,
-Height Decimal(2,2),
+Height tinytext,
 Weight tinyint,
 EyeColour tinytext,
 
@@ -37,12 +38,12 @@ CREATE TABLE VehicleInformation (
 VehicleLicense varchar(20),
 Colour tinytext,
 make tinytext,
-VIN int,
+VIN Varchar(17),
 RegisteredAddress tinytext,
 StateRegistered tinytext,
-RegisteredYear tinyint,
+RegisteredYear int,
 CarType tinytext,
-RegisteredOwner tinytext,
+OwnerLastName Char(20),
 
 PRIMARY KEY (VIN)
 );
@@ -79,7 +80,7 @@ CREATE TABLE Violations (
 ViolationID int,
 ViolationDate date,
 PersonelID int,
-VehicleVIN int,
+VehicleVIN Varchar(17),
 
 FOREIGN KEY (ViolationID) REFERENCES ViolationInformation(ViolationID),
 FOREIGN KEY (PersonelID) REFERENCES OfficerInformation(PersonelNumber),
@@ -91,22 +92,39 @@ FOREIGN KEY (VehicleVIN) REFERENCES VehicleInformation(VIN)
 #FirstName tinytext,
 #LastName tinytext,
 #Address tinytext,
+#borough
 #City tinytext,
 #State tinytext,
 #ZipCode smallint,
-#DriverLicense int,
+#DriverLicense ,
 #StateIssuedLicense tinytext,
 #BirthDate date,
 #Height Decimal(2,2),
 #Weight tinyint,
 #EyeColour tinytext,
 
-
 ## DriverInformation Data Creation
 INSERT INTO DriverInformation
-VALUES ("Winter", "Elsey", "8346 Elm Street, Brooklyn", "Wa", "NY"
+VALUES ("Winter", "Elsey", "8346 Elm Street", "Brooklyn", "New York", "NY", 98104, 99063208,
+"NY", '2001-01-01', "5'5", 96, "GR");
+INSERT INTO DriverInformation
+VALUES ("Alex", "gray", "", "", "New York", "NY", 
+ 
+#VehicleLicense varchar(20),
+#Colour tinytext,
+#make tinytext,
+#VIN int,
+#RegisteredAddress tinytext,
+#StateRegistered tinytext,
+#RegisteredYear tinyint,
+#CarType tinytext,
+#OwnerLastName char(200
+## VehicleInformation Data Creation
 
-
+INSERT INTO VehicleInformation
+VALUES ("vdf3928", "Blue", "Ford", "1C6RR7SM5ES476429", "8346 Elm Street", "New York", 2015, "Fiesta", "Elsey");
+INSERT INTO VehicleInformation
+VALUES ("afe9384","Red","Toyota","1HD4CAM18WK119007","682 Orange Street","New York", "2001","Yaris", "Gray");
 
 
 ## OfficerInformation Data Creation
@@ -133,4 +151,3 @@ INSERT INTO OfficerInformation
 VALUES ("Danes", 6261011, "HighwayPatrolOfficer");
 INSERT INTO OfficerInformation
 VALUES ("Gates", 8179260, "HighwayPatrolOfficer")
-
