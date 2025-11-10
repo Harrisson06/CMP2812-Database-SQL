@@ -1,6 +1,9 @@
+
 # NEW YORK STATE PATROL Database
-# Creating the Database and then using the database
+# Creating the Database
 CREATE DATABASE NYSPD;
+
+# Accessing the database to intput data
 USE NYSPD;
 
 ### Commands that dont work the way i want 
@@ -83,6 +86,7 @@ PersonelID int,
 VehicleVIN Varchar(17),
 
 FOREIGN KEY (ViolationID) REFERENCES ViolationInformation(ViolationID),
+FOREIGN KEY (ViolationDate) REFERENCES ViolationInformation(ViolationDate),
 FOREIGN KEY (PersonelID) REFERENCES OfficerInformation(PersonelNumber),
 FOREIGN KEY (VehicleVIN) REFERENCES VehicleInformation(VIN)
 );
@@ -108,7 +112,8 @@ INSERT INTO DriverInformation
 VALUES ("Winter", "Elsey", "8346 Elm Street", "Brooklyn", "New York", "NY", 98104, 99063208,
 "NY", '2001-01-01', "5'5", 96, "GR");
 INSERT INTO DriverInformation
-VALUES ("Alex", "gray", "", "", "New York", "NY", 
+VALUES ("Alex", "gray", "64 North Street", "Fresh Meadows", "New York", "NY", 11365, 9378395,
+"NY", '1999-02-12', "5'7", 84, "BL");
  
 #VehicleLicense varchar(20),
 #Colour tinytext,
